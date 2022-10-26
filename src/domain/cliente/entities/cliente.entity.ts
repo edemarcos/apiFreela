@@ -1,4 +1,4 @@
-import Usuario from "./usuario.entity";
+import Usuario from "../../usuario/entities/usuario.entity";
 
 export default class Cliente{
     constructor (

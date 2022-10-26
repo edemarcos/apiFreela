@@ -1,6 +1,6 @@
 import CategoriaServico from "./categoria.servico.entity";
 import Cliente from "./cliente.entity";
-import Proposta from "./proposta.entity";
+import Proposta from "../../freelancer/entities/proposta.entity";
 
 export default class Servico{
     constructor (

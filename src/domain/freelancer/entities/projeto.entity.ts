@@ -1,5 +1,5 @@
 import Freelancer from "./freelancer.entity";
-import Servico from "./servico.entity";
+import Servico from "../../cliente/entities/servico.entity";
 
 export default class Projeto{
     constructor (

@@ -1,13 +1,13 @@
+import UsuarioDataProvider from "../dataproviders/usuario.dataprovaider";
 import Usuario from "../entities/usuario.entity";
 import SalvarUsuarioUseCase from "../usecases/salvarusuario.usecase";
 
 export default class SalvarUsuario implements SalvarUsuarioUseCase{
     constructor(
-        private readonly usuario: Usuario
+        private usuarioDataProvider: UsuarioDataProvider
     ){}
 
     async execute(usuario: Usuario): Promise<Usuario> {
-        const retorno = await this.usuarioDataProvider.save(usuario) 
-        return retorno
+        return await this.usuarioDataProvider.salvarUsuario(usuario) 
     }
 }
