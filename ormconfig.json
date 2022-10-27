@@ -1,21 +1,21 @@
 {
-   "type": "postgres",
+   "type": "mysql2",
    "host": "localhost",
-   "port": 5433,
-   "username": "postgres",
+   "port": 3306,
+   "username": "root",
    "password": "docker",
    "database": "mussum",
    "entities": [
-     "src/models/**/*.ts"
+     "./src/**/*.model{.ts..js}"
   ],
   "migrations": [
-   "src/migrations/**/*.ts"
+   "./src/database/migrations/**/*.ts"
  ],
   "cli":{
    "migrationsDir": [
-     "src/migrations/"
+     "./src/database/migrations/"
    ],
-   "entitiesDir": "src/models"
+   "entitiesDir": "./src/database/models"
    }
  }
  
