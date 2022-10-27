@@ -6,7 +6,7 @@
    "password": "roed%456",
    "database": "api_freelancer",
    "entities": [
-     "src/**/*.model{.ts..js}"
+     "src/database/models/**/*.ts"
   ],
   "migrations": [
    "src/database/migrations/**/*.ts"
