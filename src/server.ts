@@ -1,7 +1,12 @@
-import app from './app';
 import 'reflect-metadata';
-import './database';
+import 'dotenv/config';
+import { app } from './app';
+import { AppDataSource } from './database/data-source';
 
-app.listen(3000, () => {
-  console.log('🏃 Running Server');
+const port = process.env.APP_PORT || 3001
+
+AppDataSource.initialize().then(() => {
+  const server = app.listen(port, () => {
+    return console.log(`Server started on port ${process.env.APP_PORT}! 🏆`);
+  });
 });
