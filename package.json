@@ -7,20 +7,18 @@
       "test": "jest",
       "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
       "build": "tsc",
-      "start": "ts-node src/index.ts",
-      "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
-      "migration:generate": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:generate ./src/database/migrations/default",
-      "migration:run": "typeorm-ts-node-commonjs -d ./src/database/data-source.ts migration:run"
+      "start": "ts-node src/index.ts"
    },
    "keywords": [],
    "author": "",
    "license": "ISC",
    "devDependencies": {
+      "@prisma/client": "^4.5.0",
       "@types/express": "^4.17.14",
       "@types/jest": "^29.2.0",
-      "@types/mongodb": "^4.0.7",
       "@types/node": "^16.11.10",
       "jest": "^29.2.1",
+      "prisma": "^4.5.0",
       "ts-node": "10.7.0",
       "ts-node-dev": "^2.0.0",
       "typescript": "4.5.2"
@@ -29,7 +27,6 @@
       "dotenv": "^16.0.3",
       "express": "^4.18.2",
       "mysql2": "^2.3.3",
-      "reflect-metadata": "^0.1.13",
-      "typeorm": "^0.3.10"
+      "uuid": "^9.0.0"
    }
 }

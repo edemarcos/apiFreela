@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario{
+  id String @id @unique @default(uuid())
+  nome String
+  sobrenome String
+  email String @unique
+  senha String 
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  
+  freelancer Freelancer[]
+  cliente Cliente[]
+  @@map("usuarios")
+
+}
+
+model Freelancer{
+  id String @id @unique @default(uuid())
+  nome String
+  usuario_id String
+
+  usuario Usuario @relation(fields: [usuario_id], references: [id])
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  proposta Proposta[]
+  projeto Projeto[]
+  freelancer_habilidade Freelancer_habilidade[]
+
+  @@map("freelancers")
+}
+
+model Cliente{
+  id String @id @unique @default(uuid())
+  nome String
+  usuario_id String
+
+  usuario Usuario @relation(fields: [usuario_id], references: [id])
+  
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+
+  servico Servico[]
+  @@map("clientes")
+}
+
+model Servico{
+  id String @id @unique @default(uuid())
+  cliente_id String
+  categoria_id String
+  titulo String
+  descricao String
+  nivel_experiencia String
+  habilidades_desejadas String
+  anexo String
+  valor Float
+  visibilidade String
+  status Boolean
+  data_cadastro DateTime @default(now())
+  data_fim DateTime
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  cliente Cliente @relation(fields: [cliente_id], references: [id])
+  categoria Categoria @relation(fields: [categoria_id], references: [id])
+
+  proposta Proposta[]
+  projeto Projeto[]
+
+  @@map("servicos")
+}
+
+model Proposta{
+  id String @id @unique @default(uuid())
+  freelancer_id String
+  servico_id String
+  descricao String
+  valor Float
+  anexo String
+  status String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  servico Servico @relation(fields: [servico_id], references: [id])
+  freelancer Freelancer @relation(fields: [freelancer_id], references: [id])
+
+  @@map("propostas")
+}
+
+model Categoria{
+  id String @id @unique @default(uuid())
+  descricao String
+  status Boolean
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  servico Servico[]
+  @@map("categorias")
+}
+
+model Projeto{
+  id String @id @unique @default(uuid())
+  freelancer_id String
+  servico_id String
+  descricao String
+  anexo String
+  url String
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  freelancer Freelancer @relation(fields: [freelancer_id], references: [id])
+  servico Servico? @relation(fields: [servico_id], references: [id])
+
+  @@map("projetos")
+}
+
+model Habilidade{
+  id String @id @unique @default(uuid())
+  descricao String
+  status Boolean
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  freelancer_habilidade Freelancer_habilidade[]
+
+  @@map("habilidades")
+}
+
+model Freelancer_habilidade{
+  @@id([freelancer_id, habilidade_id])
+  freelancer_id String
+  habilidade_id String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  freelancer Freelancer @relation(fields: [freelancer_id], references: [id])
+  habilidade Habilidade @relation(fields: [habilidade_id], references: [id])
+ 
+  @@map("freelancer_habilidade")
+}
